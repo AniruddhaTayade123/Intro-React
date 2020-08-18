@@ -98,7 +98,7 @@ export const DISHES =
         category: 'dessert',
         label:'New',
         price:'199',
-        description:'A simple, plain donut soaked in sugar syrup.',
+        description:'A simple and plain yet extremely delicious donut soaked in sugar syrup served cold or hot as preferred.',
         comments: [
             {
             id: 0,
@@ -144,7 +144,7 @@ export const DISHES =
         category: 'dessert',
         label:'',
         price:'299',
-        description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms',
+        description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms.',
         comments: [
             {
             id: 0,
