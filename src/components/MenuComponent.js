@@ -1,73 +1,64 @@
 import React, { Component } from 'react';
-import { Media } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardText, CardBody,
+    CardTitle } from 'reactstrap';
 
 class Menu extends Component {
+
     constructor(props) {
         super(props);
+
         this.state = {
-            dishes: [
-                {
-                  id: 0,
-                  name:'Pizza',
-                  image: 'assets/images/pizza.png',
-                  category: 'mains',
-                  label:'Hot',
-                  price:'499',
-                  description:'Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'                        },
-               {
-                  id: 1,
-                  name:'Cutlet',
-                  image: 'assets/images/cutlet.png',
-                  category: 'appetizer',
-                  label:'',
-                  price:'99',
-                  description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce.'                        },
-                {
-                  id: 2,
-                  name:'Donut',
-                  image: 'assets/images/donut.png',
-                  category: 'dessert',
-                  label:'New',
-                  price:'99',
-                  description:'A simple, plain donut soaked in sugar syrup.'                        },
-               {
-                  id: 3,
-                  name:'Cheese Cake',
-                  image: 'assets/images/cheesecake.png',
-                  category: 'dessert',
-                  label:'',
-                  price:'299',
-                  description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms'                        }
-               ],
-        };
+            selectedDish: null
+        }
     }
-    
-    
+
+    onDishSelect(dish) {
+        this.setState({ selectedDish: dish});
+    }
+
+    renderDish(dish) {
+        if (dish != null)
+            return(
+                <Card>
+                    <CardImg top src={dish.image} alt={dish.name} />
+                    <CardBody>
+                      <CardTitle>{dish.name}</CardTitle>
+                      <CardText>{dish.description}</CardText>
+                    </CardBody>
+                </Card>
+            );
+            else
+            return(
+                <div></div>
+            );
+    }
+
     render() {
-        const menu = this.state.dishes.map((dish) => {
+        const menu = this.props.dishes.map((dish) => {
             return (
-              <div key={dish.id} className="col-12 mt-5">
-                <Media tag="li">
-                  <Media left middle>
-                      <Media object src={dish.image} alt={dish.name} />
-                  </Media>
-                  <Media body className="ml-5">
-                    <Media heading>{dish.name}</Media>
-                    <p>{dish.description}</p>
-                  </Media>
-                </Media>
+              <div  className="col-12 col-md-5 m-1">
+                <Card key={dish.id}
+                  onClick={() => this.onDishSelect(dish)}>
+                  <CardImg width="100%" src={dish.image} alt={dish.name} />
+                  <CardImgOverlay>
+                      <CardTitle>{dish.name}</CardTitle>
+                  </CardImgOverlay>
+                </Card>
               </div>
             );
         });
 
         return (
-          <div className="container">
-            <div className="row">
-              <Media list>
-                  {menu}
-              </Media>
+            <div className="container">
+                <div className="row">
+                    {menu}
+                </div>
+                <div className="row">
+                  <div  className="col-12 col-md-5 m-1">
+                    {this.renderDish(this.state.selectedDish)}
+                  </div>
+                </div>
             </div>
-          </div>
         );
     }
 }
